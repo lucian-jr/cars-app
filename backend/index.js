@@ -1,24 +1,35 @@
-require('dotenv').config();
 
 const express = require('express');
 const app = express();
-const port = 3000;
+const cors = require('cors');
+const db = require('./db');
+const Car = require('./src/models/carsModel');
 
-const mongoose = require('mongoose');
+const port = 3030;
 
-mongoose.connect(process.env.URI)
-    .then(() => {
-        console.log('Connected to data base')
-        app.emit('ready');
-    })
-    .catch(e => console.log(e));
+app.use(express.json());
+app.use(cors());
 
-app.get('/', (req, res) => {
-  res.send('Hello, Express!');
+app.use(cors({
+    origin: 'http://localhost:3000',  // Substitua pelo URL do seu aplicativo frontend
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true,
+}));
+
+app.post('/cars', async (req, res) => {
+    try {
+        const { brand, model, name, year, price, chassis, color } = req.body;
+
+        const car = new Car({ brand, model, name, year, price, chassis, color });
+
+        await car.save();
+        res.status(201).json(car);
+    } catch (error) {
+        res.status(500).json({ error: error.message })
+    }
 });
 
-app.on('ready', () => {
-    app.listen(port, () => {
-        console.log(`Server is running on http://localhost:${port}`);
-    })
-});
+app.listen(port, () => {
+    console.log('Connected to data base')
+    console.log(`Server is running on http://localhost:${port}`);
+})
