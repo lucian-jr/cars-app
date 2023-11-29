@@ -1,1 +1,1 @@
-export * from './dash-board/DashBoard';
+export * from './home/Home';
