@@ -1,20 +1,21 @@
 import { Box, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, useTheme } from "@mui/material";
-import { DefaultToolBar, DetailsToolBar } from "../../shared/components";
+import { DefaultToolBar } from "../../shared/components";
+import { useNavigate } from "react-router-dom";
 
-export const Home: React.FC = () => {
+export const CarsList: React.FC = () => {
 
     const theme = useTheme();
+    const navigate = useNavigate();
 
     return (
-        <Box height='100%' padding='0px 20px' flex={1} overflow='auto'>
+        <Box height='100%' paddingX={2}>
             <Box height={theme.spacing(10)} display='flex' alignItems='center'>
                 <Typography variant='h5'>
-                    <h3>HOME - Cars list</h3>
+                    Cars
                 </Typography>
             </Box>
 
-            <DefaultToolBar />
-            {/* <DetailsToolBar /> */}
+            <DefaultToolBar onClickNewButton={() => navigate('/cars/car/new')} />
 
             <Box>
                 <TableContainer component={Paper}>

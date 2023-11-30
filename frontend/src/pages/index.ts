@@ -1,2 +1,2 @@
-export * from './home/Home';
-export * from './cars-registration/CarRegistration';
+export * from './cars/CarsList';
+export * from './cars/CarDetails';

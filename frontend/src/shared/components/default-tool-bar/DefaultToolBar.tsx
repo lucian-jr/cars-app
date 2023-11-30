@@ -6,7 +6,8 @@ interface IDefaultToolBarProps {
     showSearchInput?: boolean;
     onAlterSearchText?: (newText: string) => void;
 
-    showAddButton?: boolean;
+    showNewButton?: boolean;
+    onClickNewButton: () => void;
 }
 
 export const DefaultToolBar: React.FC<IDefaultToolBarProps> = ({
@@ -14,7 +15,8 @@ export const DefaultToolBar: React.FC<IDefaultToolBarProps> = ({
     showSearchInput = false,
     onAlterSearchText,
 
-    showAddButton = true,
+    showNewButton = true,
+    onClickNewButton,
 }) => {
 
     const theme = useTheme();
@@ -28,7 +30,6 @@ export const DefaultToolBar: React.FC<IDefaultToolBarProps> = ({
             paddingX={2}
             height={theme.spacing(8)}
             marginBottom={theme.spacing(4)}
-
         >
             { showSearchInput &&
                 <TextField
@@ -40,9 +41,9 @@ export const DefaultToolBar: React.FC<IDefaultToolBarProps> = ({
                 />
             }
 
-            { showAddButton &&
+            { showNewButton &&
                 <Box width='100%' display='flex' flex={1} justifyContent='end'>
-                    <Button variant="contained" endIcon={<AddIcon />}>
+                    <Button variant="contained" endIcon={<AddIcon />} onClick={onClickNewButton}>
                         NEW
                     </Button>
                 </Box>

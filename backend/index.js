@@ -3,7 +3,7 @@ const express = require('express');
 const app = express();
 const cors = require('cors');
 const db = require('./db');
-const Car = require('./src/models/carsModel');
+const CarsModel = require('./src/models/carsModel');
 
 const port = 3030;
 
@@ -16,11 +16,11 @@ app.use(cors({
     credentials: true,
 }));
 
-app.post('/cars', async (req, res) => {
+app.post('/car', async (req, res) => {
     try {
         const { brand, model, name, year, price, chassis, color } = req.body;
 
-        const car = new Car({ brand, model, name, year, price, chassis, color });
+        const car = new CarsModel({ brand, model, name, year, price, chassis, color });
 
         await car.save();
         res.status(201).json(car);

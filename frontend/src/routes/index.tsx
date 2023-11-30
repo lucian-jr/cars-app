@@ -1,18 +1,14 @@
 import { Routes, Route, Navigate} from 'react-router-dom';
-import { Home, CarRegistration } from '../pages/';
-import { Button } from '@mui/material';
-import { useAppThemeContext } from '../shared/contexts';
+import { CarsList, CarsDetails } from '../pages/';
 
 export const AppRoutes = () => {
 
-    const { toggleTheme } = useAppThemeContext();
-
     return(
         <Routes>
-            <Route path='/home' element={<Home />}/>
-            <Route path='/car-form' element={<CarRegistration />}/>
+            <Route path='/cars' element={<CarsList />}/>
+            <Route path='/cars/car/:id?' element={<CarsDetails />}/>
 
-            <Route path='*' element={<Navigate to="/home" />}/>
+            <Route path='*' element={<Navigate to="/cars" />}/>
         </Routes>
     );
 }

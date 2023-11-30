@@ -9,6 +9,8 @@ interface IDetailsToolBarProps {
     showDeleteButton?: boolean;
     showAddButton?: boolean;
     showBackButton?: boolean;
+
+    onClickBackButton: () => void;
 }
 
 export const DetailsToolBar: React.FC<IDetailsToolBarProps> = ({
@@ -16,6 +18,8 @@ export const DetailsToolBar: React.FC<IDetailsToolBarProps> = ({
     showDeleteButton = true,
     showAddButton = true,
     showBackButton = true,
+
+    onClickBackButton
 }) => {
 
     const theme = useTheme();
@@ -27,17 +31,11 @@ export const DetailsToolBar: React.FC<IDetailsToolBarProps> = ({
             gap={1}
             paddingX={2}
             height={theme.spacing(8)}
-
+            marginBottom={theme.spacing(4)}
         >
             {showSaveButton &&
                 <Button variant="contained" color='success' startIcon={<SaveIcon />}>
                     SAVE
-                </Button>
-            }
-
-            {showDeleteButton &&
-                <Button variant="contained" color='error' startIcon={<DeleteIcon />}>
-                    REMOVE
                 </Button>
             }
 
@@ -47,9 +45,15 @@ export const DetailsToolBar: React.FC<IDetailsToolBarProps> = ({
                 </Button>
             }
 
+            {showDeleteButton &&
+                <Button variant="contained" color='error' startIcon={<DeleteIcon />}>
+                    REMOVE
+                </Button>
+            }
+
             {showBackButton &&
                 <Box width='100%' display='flex' flex={1} justifyContent='end'>
-                    <Button variant="contained" color="secondary" startIcon={<ArrowBackIcon />}>
+                    <Button variant="outlined" color="secondary" onClick={onClickBackButton} startIcon={<ArrowBackIcon />}>
                         BACK
                     </Button>
                 </Box>
