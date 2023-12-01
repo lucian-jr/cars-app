@@ -17,6 +17,9 @@ app.use(cors({
 }));
 
 app.post('/car', async (req, res) => {
+
+    console.log(req.body);
+    
     try {
         const { brand, model, name, year, price, chassis, color } = req.body;
 
